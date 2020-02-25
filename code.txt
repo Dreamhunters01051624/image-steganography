@@ -4,6 +4,7 @@
 # PIL module is used to extract 
 # pixels of image and modify it 
 from PIL import Image 
+
   
 # Convert encoding data into 8-bit binary 
 # form using ASCII value of characters 
@@ -81,9 +82,11 @@ def encode():
     
     
     image = Image.open(img, 'r') 
+
+    image.show()
     
     data = raw_input("Enter data to be encoded : ") 
-    #data = hello
+    
     if (len(data) == 0): 
         raise ValueError('Data is empty') 
           
@@ -99,7 +102,8 @@ def decode():
     print "Decode"
     img = raw_input("Enter image name(with extension) :") 
     
-    image = Image.open(img, 'r') 
+    image = Image.open(img, 'r')
+    image.show()
     
     data = '' 
     imgdata = iter(image.getdata()) 
@@ -123,16 +127,31 @@ def decode():
         data += chr(int(binstr, 2)) 
         if (pixels[-1] % 2 != 0): 
             return data 
-              
-# Main Function         
-def main(): 
-    a = int(input(":: Welcome to Steganography ::\n"
-                        "1.Encode\n2.Decode\n")) 
-    if (a == 1): 
+
+        
+        
+        
+# Main Function
+
+def main():
+    #declaring key    
+    pkey = 123
+
+    a = int(raw_input(":: Image Steganography ::\n"
+                        "1.Encrypt\n2.Decrypt\n")) 
+    if (a == 1):
+        print("Encryption")
         encode() 
-          
-    elif (a == 2): 
-        print("Decoded word- " + decode()) 
+        print("Data has sucessfully Encrpyted")
+    elif (a == 2):
+            
+            print("Decryption")
+            Pkey = int(raw_input("Enter the key to be decrypted : "))
+            if(pkey == Pkey):
+                    print("--Decoded word--  " + decode())
+            else :
+                    raise Exception("Enter correct key")
+        
     else: 
         raise Exception("Enter correct input") 
           
